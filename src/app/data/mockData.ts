@@ -1,0 +1,231 @@
+import { Product, Customer, Order, Message, Conversation, Analytics } from '../types';
+
+export const products: Product[] = [
+  { id: '1', name: 'Product A', sku: 'SKU-001', price: 2300, stock: 24, category: 'Electronics' },
+  { id: '2', name: 'Product B', sku: 'SKU-002', price: 4500, stock: 15, category: 'Electronics' },
+  { id: '3', name: 'Product C', sku: 'SKU-003', price: 1200, stock: 50, category: 'Hardware' },
+  { id: '4', name: 'Product D', sku: 'SKU-004', price: 8900, stock: 8, category: 'Electronics' },
+  { id: '5', name: 'Product E', sku: 'SKU-005', price: 3400, stock: 0, category: 'Hardware' },
+  { id: '6', name: 'Product F', sku: 'SKU-006', price: 5600, stock: 32, category: 'Tools' },
+];
+
+export const customers: Customer[] = [
+  { id: '1', name: 'Ahmed Benali', phone: '+213 555 123 456', balance: 54000, totalOrders: 24, lastContact: '2026-03-16T10:30:00', type: 'wholesale' },
+  { id: '2', name: 'Fatima Zahra', phone: '+213 555 234 567', balance: 0, totalOrders: 8, lastContact: '2026-03-16T09:15:00', type: 'retail' },
+  { id: '3', name: 'Karim Mansouri', phone: '+213 555 345 678', balance: 12000, totalOrders: 15, lastContact: '2026-03-15T16:45:00', type: 'wholesale' },
+  { id: '4', name: 'Samira Boudiaf', phone: '+213 555 456 789', balance: 0, totalOrders: 3, lastContact: '2026-03-15T14:20:00', type: 'retail' },
+  { id: '5', name: 'Yacine Hamidi', phone: '+213 555 567 890', balance: 28000, totalOrders: 19, lastContact: '2026-03-14T11:00:00', type: 'wholesale' },
+];
+
+export const orders: Order[] = [
+  {
+    id: '452',
+    customerId: '1',
+    customerName: 'Ahmed Benali',
+    products: [{ productId: '1', productName: 'Product A', quantity: 10, price: 2300 }],
+    total: 23000,
+    status: 'confirmed',
+    createdAt: '2026-03-16T10:30:00',
+    source: 'whatsapp',
+  },
+  {
+    id: '451',
+    customerId: '2',
+    customerName: 'Fatima Zahra',
+    products: [
+      { productId: '2', productName: 'Product B', quantity: 2, price: 4500 },
+      { productId: '3', productName: 'Product C', quantity: 5, price: 1200 },
+    ],
+    total: 15000,
+    status: 'delivered',
+    createdAt: '2026-03-16T09:15:00',
+    source: 'whatsapp',
+  },
+  {
+    id: '450',
+    customerId: '3',
+    customerName: 'Karim Mansouri',
+    products: [{ productId: '4', productName: 'Product D', quantity: 3, price: 8900 }],
+    total: 26700,
+    status: 'pending',
+    createdAt: '2026-03-15T16:45:00',
+    source: 'erp',
+  },
+  {
+    id: '449',
+    customerId: '1',
+    customerName: 'Ahmed Benali',
+    products: [{ productId: '6', productName: 'Product F', quantity: 8, price: 5600 }],
+    total: 44800,
+    status: 'delivered',
+    createdAt: '2026-03-15T14:20:00',
+    source: 'whatsapp',
+  },
+  {
+    id: '448',
+    customerId: '5',
+    customerName: 'Yacine Hamidi',
+    products: [{ productId: '1', productName: 'Product A', quantity: 15, price: 2300 }],
+    total: 34500,
+    status: 'confirmed',
+    createdAt: '2026-03-14T11:00:00',
+    source: 'whatsapp',
+  },
+];
+
+export const conversations: Conversation[] = [
+  {
+    id: '1',
+    customerId: '1',
+    customerName: 'Ahmed Benali',
+    customerPhone: '+213 555 123 456',
+    lastMessage: 'Your order #452 has been created.',
+    lastMessageTime: '2026-03-16T10:30:00',
+    unread: 0,
+    status: 'active',
+  },
+  {
+    id: '2',
+    customerId: '2',
+    customerName: 'Fatima Zahra',
+    customerPhone: '+213 555 234 567',
+    lastMessage: 'Order #451 is delivered.',
+    lastMessageTime: '2026-03-16T09:15:00',
+    unread: 0,
+    status: 'resolved',
+  },
+  {
+    id: '3',
+    customerId: '3',
+    customerName: 'Karim Mansouri',
+    customerPhone: '+213 555 345 678',
+    lastMessage: 'Do you have Product D in stock?',
+    lastMessageTime: '2026-03-15T16:45:00',
+    unread: 1,
+    status: 'active',
+  },
+  {
+    id: '4',
+    customerId: '4',
+    customerName: 'Samira Boudiaf',
+    customerPhone: '+213 555 456 789',
+    lastMessage: 'What are your delivery options?',
+    lastMessageTime: '2026-03-15T14:20:00',
+    unread: 2,
+    status: 'active',
+  },
+];
+
+export const messages: Record<string, Message[]> = {
+  '1': [
+    {
+      id: '1',
+      conversationId: '1',
+      sender: 'customer',
+      content: 'Do you have Product A?',
+      timestamp: '2026-03-16T10:25:00',
+      type: 'text',
+    },
+    {
+      id: '2',
+      conversationId: '1',
+      sender: 'assistant',
+      content: 'Product A is available\nPrice: 2,300 DZD\nStock: 24 units',
+      timestamp: '2026-03-16T10:25:05',
+      type: 'text',
+    },
+    {
+      id: '3',
+      conversationId: '1',
+      sender: 'customer',
+      content: 'Order 10 Product A',
+      timestamp: '2026-03-16T10:28:00',
+      type: 'text',
+    },
+    {
+      id: '4',
+      conversationId: '1',
+      sender: 'system',
+      content: 'Your order #452 has been created.',
+      timestamp: '2026-03-16T10:30:00',
+      type: 'order',
+    },
+  ],
+  '2': [
+    {
+      id: '5',
+      conversationId: '2',
+      sender: 'customer',
+      content: 'I need Product B and Product C',
+      timestamp: '2026-03-16T09:10:00',
+      type: 'text',
+    },
+    {
+      id: '6',
+      conversationId: '2',
+      sender: 'assistant',
+      content: 'Sure! How many units of each?',
+      timestamp: '2026-03-16T09:11:00',
+      type: 'text',
+    },
+    {
+      id: '7',
+      conversationId: '2',
+      sender: 'customer',
+      content: '2 Product B and 5 Product C',
+      timestamp: '2026-03-16T09:12:00',
+      type: 'text',
+    },
+    {
+      id: '8',
+      conversationId: '2',
+      sender: 'system',
+      content: 'Order #451 created. Total: 15,000 DZD',
+      timestamp: '2026-03-16T09:13:00',
+      type: 'order',
+    },
+    {
+      id: '9',
+      conversationId: '2',
+      sender: 'system',
+      content: 'Order #451 is delivered.',
+      timestamp: '2026-03-16T09:15:00',
+      type: 'notification',
+    },
+  ],
+  '3': [
+    {
+      id: '10',
+      conversationId: '3',
+      sender: 'customer',
+      content: 'Do you have Product D in stock?',
+      timestamp: '2026-03-15T16:45:00',
+      type: 'text',
+    },
+  ],
+  '4': [
+    {
+      id: '11',
+      conversationId: '4',
+      sender: 'customer',
+      content: 'What are your delivery options?',
+      timestamp: '2026-03-15T14:20:00',
+      type: 'text',
+    },
+    {
+      id: '12',
+      conversationId: '4',
+      sender: 'customer',
+      content: 'balance',
+      timestamp: '2026-03-15T14:25:00',
+      type: 'text',
+    },
+  ],
+};
+
+export const analyticsData: Analytics[] = [
+  { period: 'Week 1', whatsappOrders: 45, totalOrders: 68, revenue: 234000, avgResponseTime: 12, customerSatisfaction: 4.5 },
+  { period: 'Week 2', whatsappOrders: 52, totalOrders: 75, revenue: 289000, avgResponseTime: 10, customerSatisfaction: 4.7 },
+  { period: 'Week 3', whatsappOrders: 61, totalOrders: 82, revenue: 312000, avgResponseTime: 8, customerSatisfaction: 4.8 },
+  { period: 'Week 4', whatsappOrders: 58, totalOrders: 79, revenue: 298000, avgResponseTime: 9, customerSatisfaction: 4.6 },
+];
